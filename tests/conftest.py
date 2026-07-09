@@ -2,19 +2,21 @@
 
 How fixtures connect (pytest runs these automatically):
 
-  browser          ← reads --browser from command line (chrome / firefox)
+  browser          ← chrome / firefox (from --browser, or both for cross-browser runs)
        ↓
   driver           ← opens browser before test, closes after test
        ↓
   login_in_driver  ← optional: navigates to app and logs in (uses Excel credentials)
 
-Each test picks what it needs in its method signature:
-  def test_x(self, driver):           → fresh browser, not logged in
-  def test_y(self, login_in_driver):  → browser already on inventory page
+Parallel execution (pytest-xdist):
+  pytest -n auto tests/ --browser chrome  → parallel on Chrome only
+  pytest -n auto tests/ --browser both    → parallel on Chrome and Firefox together
 """
 
+import os
 import shutil
 import tempfile
+from datetime import datetime
 
 import pytest
 from selenium import webdriver
@@ -22,11 +24,68 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 from pages.login_page import LoginPage
+from utilities.customLogger import LogGeneration
 from utilities.readExcel import ReadExcel
 from utilities.readProperties import ReadConfig
 from utilities.screenshotHelper import ScreenshotHelper
 
 _SUPPORTED_BROWSERS = {"chrome", "firefox"}
+_logger = LogGeneration.log_generation()
+
+
+def _browsers_for_option(browser_option):
+    """Map --browser flag to a list of browser names for this run."""
+    browser_option = browser_option.lower()
+    if browser_option == "both":
+        return ["chrome", "firefox"]
+    if browser_option in _SUPPORTED_BROWSERS:
+        return [browser_option]
+    raise pytest.UsageError(
+        f"Unsupported --browser value: '{browser_option}'. Use: chrome, firefox, both"
+    )
+
+
+def pytest_addoption(parser):
+    """Add --browser option for Chrome, Firefox, or both."""
+    parser.addoption(
+        "--browser",
+        default="chrome",
+        help="Browser: chrome, firefox, or both (runs each test on both browsers)",
+    )
+
+
+def pytest_configure(config):
+    """Use a unique HTML report name for parallel runs to avoid overwrites."""
+    if hasattr(config, "workerinput"):
+        return
+    numprocesses = getattr(config.option, "numprocesses", None)
+    if not numprocesses:
+        return
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    report_path = os.path.join("Reports", f"report_parallel_{timestamp}.html")
+    config.option.htmlpath = report_path
+    os.makedirs("Reports", exist_ok=True)
+
+
+def pytest_generate_tests(metafunc):
+    """Duplicate tests per browser when a test uses a driver-based fixture."""
+    driver_fixtures = {"driver", "login_in_driver", "login_page"}
+    if not driver_fixtures & set(metafunc.fixturenames):
+        return
+    browsers = _browsers_for_option(metafunc.config.getoption("--browser"))
+    metafunc.parametrize("browser", browsers, indirect=True)
+
+
+@pytest.fixture
+def test_logger():
+    """Shared logger for all tests."""
+    return _logger
+
+
+@pytest.fixture
+def browser(request):
+    """Browser name for this test instance (chrome or firefox)."""
+    return request.param
 
 
 def _create_chrome_driver():
@@ -61,34 +120,19 @@ def _create_firefox_driver():
     return webdriver.Firefox(options=options)
 
 
-def pytest_addoption(parser):
-    """Add --browser option so run.bat can pass chrome or firefox."""
-    parser.addoption("--browser", default="chrome", help="Browser: chrome or firefox")
-
-
-@pytest.fixture
-def browser(request):
-    """Read --browser from command line (used by driver fixture)."""
-    value = request.config.getoption("--browser").lower()
-    if value not in _SUPPORTED_BROWSERS:
-        pytest.fail(f"Unsupported browser: '{value}'. Use: chrome, firefox")
-    return value
-
-
 @pytest.fixture()
 def driver(browser):
     """Open browser before test, close browser after test.
 
-    yield = code before runs at START of test, code after runs at END (teardown).
+    Uses explicit waits in BasePage only — no implicit wait (avoids slow/flaky tests).
     """
     if browser == "firefox":
         driver = _create_firefox_driver()
     else:
         driver = _create_chrome_driver()
     driver.maximize_window()
-    driver.implicitly_wait(10)  # Selenium waits up to 10s when finding elements
     yield driver
-    driver.quit()  # always close browser, even if test fails
+    driver.quit()
     user_data_dir = getattr(driver, "_chrome_user_data_dir", None)
     if user_data_dir:
         shutil.rmtree(user_data_dir, ignore_errors=True)
@@ -104,21 +148,18 @@ def login_in_driver(driver):
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item, call):
-    """Pytest hook — runs after each test phase (setup / call / teardown).
-
-    When the test body fails, grab the WebDriver from fixtures and save a screenshot
-    to Screenshots/ so you can see what the page looked like at failure time.
-    """
+    """Save a screenshot when a test fails."""
     outcome = yield
     report = outcome.get_result()
     if report.when != "call" or not report.failed:
-        return  # only screenshot on actual test failure, not setup errors
+        return
     for fixture_name in ("login_in_driver", "driver"):
         driver = item.funcargs.get(fixture_name)
         if driver:
             screenshot_name = item.nodeid.replace("::", "_").replace("/", "_").replace("\\", "_")
             try:
-                ScreenshotHelper.save_fail(driver, screenshot_name)
-            except Exception:
-                pass  # don't hide the original test failure if screenshot fails
+                path = ScreenshotHelper.save_fail(driver, screenshot_name)
+                _logger.error(f"Failure screenshot saved: {path}")
+            except Exception as exc:
+                _logger.error(f"Could not save failure screenshot: {exc}")
             break

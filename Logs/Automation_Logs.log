@@ -37,3 +37,72 @@
 06/28/2026 11:08:35 PM : INFO : Starting: login and verify inventory page
 06/28/2026 11:08:36 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_login_inventory_success_20260628_230835.png
 06/28/2026 11:08:36 PM : INFO : Ending: login test
+07/07/2026 11:41:17 PM : INFO : Starting: add to cart for Sauce Labs Backpack
+07/07/2026 11:41:18 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_backpack_success_20260707_234118.png
+07/07/2026 11:41:18 PM : INFO : Ending: add to cart test
+07/07/2026 11:41:25 PM : INFO : Added Sauce Labs Backpack, cart count=1
+07/07/2026 11:41:25 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_full_flow_complete_success_20260707_234125.png
+07/07/2026 11:41:25 PM : INFO : Ending: full flow test
+07/07/2026 11:41:32 PM : INFO : Starting: login and verify inventory page
+07/07/2026 11:41:32 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_login_inventory_success_20260707_234132.png
+07/07/2026 11:41:32 PM : INFO : Ending: login test
+07/07/2026 11:41:50 PM : INFO : Starting: logout flow
+07/07/2026 11:41:51 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_logout_logout_success_20260707_234151.png
+07/07/2026 11:41:51 PM : INFO : Ending: logout test
+07/07/2026 11:46:23 PM : INFO : Starting: add to cart for Sauce Labs Backpack
+07/07/2026 11:46:24 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_backpack_success_20260707_234624.png
+07/07/2026 11:46:24 PM : INFO : Ending: add to cart test
+07/07/2026 11:46:30 PM : INFO : Starting: add to cart for Sauce Labs Bike Light
+07/07/2026 11:46:30 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_bike_light_success_20260707_234630.png
+07/07/2026 11:46:30 PM : INFO : Ending: add to cart test
+07/07/2026 11:46:37 PM : INFO : Added Sauce Labs Backpack, cart count=1
+07/07/2026 11:46:37 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_full_flow_complete_success_20260707_234637.png
+07/07/2026 11:46:37 PM : INFO : Ending: full flow test
+07/07/2026 11:46:43 PM : INFO : Starting: login and verify inventory page
+07/07/2026 11:46:43 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_login_inventory_success_20260707_234643.png
+07/07/2026 11:46:43 PM : INFO : Ending: login test
+07/07/2026 11:46:48 PM : INFO : Starting: wrong password login test
+07/07/2026 11:46:48 PM : INFO : Ending: wrong password login test
+07/07/2026 11:46:53 PM : INFO : Starting: locked out user login test
+07/07/2026 11:46:54 PM : INFO : Ending: locked out user login test
+07/07/2026 11:46:59 PM : INFO : Starting: logout flow
+07/07/2026 11:47:00 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_logout_success_20260707_234700.png
+07/07/2026 11:47:00 PM : INFO : Ending: logout test
+07/07/2026 11:47:22 PM : INFO : Starting: add to cart for Sauce Labs Backpack
+07/07/2026 11:47:22 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_backpack_success_20260707_234722.png
+07/07/2026 11:47:22 PM : INFO : Ending: add to cart test
+07/07/2026 11:47:27 PM : INFO : Starting: add to cart for Sauce Labs Bike Light
+07/07/2026 11:47:28 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_bike_light_success_20260707_234728.png
+07/07/2026 11:47:28 PM : INFO : Ending: add to cart test
+07/07/2026 11:47:34 PM : INFO : Added Sauce Labs Backpack, cart count=1
+07/07/2026 11:47:34 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_full_flow_complete_success_20260707_234734.png
+07/07/2026 11:47:34 PM : INFO : Ending: full flow test
+07/07/2026 11:47:38 PM : INFO : Starting: login and verify inventory page
+07/07/2026 11:47:39 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_login_inventory_success_20260707_234738.png
+07/07/2026 11:47:39 PM : INFO : Ending: login test
+07/07/2026 11:47:42 PM : INFO : Starting: wrong password login test
+07/07/2026 11:47:43 PM : INFO : Ending: wrong password login test
+07/07/2026 11:47:47 PM : INFO : Starting: locked out user login test
+07/07/2026 11:47:47 PM : INFO : Ending: locked out user login test
+07/07/2026 11:47:52 PM : INFO : Starting: logout flow
+07/07/2026 11:47:53 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_logout_success_20260707_234752.png
+07/07/2026 11:47:53 PM : INFO : Ending: logout test
+07/09/2026 08:23:42 PM : INFO : Starting: add to cart for Sauce Labs Backpack
+07/09/2026 08:23:43 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_backpack_success_20260709_202343.png
+07/09/2026 08:23:43 PM : INFO : Ending: add to cart test
+07/09/2026 08:23:50 PM : INFO : Starting: add to cart for Sauce Labs Bike Light
+07/09/2026 08:23:51 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_bike_light_success_20260709_202350.png
+07/09/2026 08:23:51 PM : INFO : Ending: add to cart test
+07/09/2026 08:23:57 PM : INFO : Added Sauce Labs Backpack, cart count=1
+07/09/2026 08:23:57 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_full_flow_complete_success_20260709_202357.png
+07/09/2026 08:23:57 PM : INFO : Ending: full flow test
+07/09/2026 08:24:03 PM : INFO : Starting: login and verify inventory page
+07/09/2026 08:24:04 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_login_inventory_success_20260709_202403.png
+07/09/2026 08:24:04 PM : INFO : Ending: login test
+07/09/2026 08:24:08 PM : INFO : Starting: wrong password login test
+07/09/2026 08:24:09 PM : INFO : Ending: wrong password login test
+07/09/2026 08:24:13 PM : INFO : Starting: locked out user login test
+07/09/2026 08:24:13 PM : INFO : Ending: locked out user login test
+07/09/2026 08:24:19 PM : INFO : Starting: logout flow
+07/09/2026 08:24:20 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_logout_success_20260709_202420.png
+07/09/2026 08:24:20 PM : INFO : Ending: logout test

@@ -1,28 +1,18 @@
-"""Login test — verify user reaches inventory page after login.
-
-Flow:
-  1. conftest opens browser and logs in (login_in_driver fixture)
-  2. This test checks the inventory page title is 'Products'
-  3. Screenshot saved on success
-"""
+"""Login tests — verify successful login reaches the inventory page."""
 
 from pages.inventory_page import InventoryPage
-from utilities.customLogger import LogGeneration
 from utilities.screenshotHelper import ScreenshotHelper
+from utilities.testConstants import INVENTORY_PAGE_TITLE
 
 
-class Test_Login:
-    logger = LogGeneration.log_generation()
-    TEST_FILE = "test_login"
+def test_inventory_after_login(login_in_driver, test_logger):
+    """After login, the inventory page title should be 'Products'."""
+    test_logger.info("Starting: login and verify inventory page")
 
-    def test_inventory_after_login(self, login_in_driver):
-        # login_in_driver = browser already on inventory page (login done in conftest)
-        self.logger.info("Starting: login and verify inventory page")
+    inventory = InventoryPage(login_in_driver)
+    assert inventory.is_inventory_page_displayed()
+    assert inventory.get_products_title() == INVENTORY_PAGE_TITLE
 
-        # Page Object: InventoryPage wraps Selenium calls for the product list page
-        title = InventoryPage(login_in_driver).get_products_title()
-        assert title == "Products"  # proves login succeeded
-
-        path = ScreenshotHelper.save_success(login_in_driver, f"{self.TEST_FILE}_inventory")
-        self.logger.info(f"Screenshot: {path}")
-        self.logger.info("Ending: login test")
+    path = ScreenshotHelper.save_success(login_in_driver, "test_login_inventory")
+    test_logger.info(f"Screenshot: {path}")
+    test_logger.info("Ending: login test")

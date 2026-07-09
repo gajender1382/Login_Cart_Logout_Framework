@@ -10,6 +10,7 @@ class LoginPage(BasePage):
     USERNAME = (By.NAME, "user-name")
     PASSWORD = (By.NAME, "password")
     LOGIN_BUTTON = (By.NAME, "login-button")
+    ERROR_BANNER = (By.CSS_SELECTOR, "[data-test='error']")
 
     def login(self, username, password):
         """Clear fields, type credentials, and click Login."""
@@ -22,3 +23,11 @@ class LoginPage(BasePage):
         password_field.send_keys(password)
 
         self.click(self.LOGIN_BUTTON)
+
+    def is_login_page_displayed(self):
+        """True when the login form is visible (used after logout)."""
+        return self.wait_visible(self.USERNAME).is_displayed()
+
+    def get_error_message(self):
+        """Return login error banner text when credentials are invalid."""
+        return self.wait_visible(self.ERROR_BANNER).text

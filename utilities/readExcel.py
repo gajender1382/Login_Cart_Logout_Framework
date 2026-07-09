@@ -1,6 +1,7 @@
 """Read test data (username, password, products) from Excel."""
 
 import os
+from functools import lru_cache
 
 from openpyxl import load_workbook
 
@@ -26,31 +27,34 @@ class ReadExcel:
         return path
 
     @classmethod
-    def _get_sheet(cls, sheet_name):
-        """Open workbook and return the requested sheet."""
+    @lru_cache(maxsize=2)
+    def _load_workbook(cls):
+        """Open workbook once per sheet type and cache it for the test run."""
         excel_path = cls._excel_path()
         try:
-            workbook = load_workbook(excel_path, read_only=True, data_only=True)
+            return load_workbook(excel_path, read_only=True, data_only=True)
         except PermissionError as exc:
             raise PermissionError(
                 f"Cannot read '{excel_path}'. Close Excel and run again."
             ) from exc
+
+    @classmethod
+    def _get_sheet(cls, sheet_name):
+        """Return a sheet from the cached workbook."""
+        workbook = cls._load_workbook()
         if sheet_name not in workbook.sheetnames:
-            workbook.close()
             raise ValueError(f"Sheet '{sheet_name}' not found.")
-        return workbook, workbook[sheet_name]
+        return workbook[sheet_name]
 
     @classmethod
     def get_user(cls, username=None):
         """Return one user dict from Users sheet. Uses default username if none given."""
-        workbook, sheet = cls._get_sheet(cls.USERS_SHEET)
+        sheet = cls._get_sheet(cls.USERS_SHEET)
         if username is None:
             username = ReadConfig.getDefaultUsername()
         for row in sheet.iter_rows(min_row=2, values_only=True):  # row 1 = header
             if row[0] and row[1] and str(row[0]) == username:
-                workbook.close()
                 return {"username": str(row[0]), "password": str(row[1])}
-        workbook.close()
         raise ValueError(f"Username '{username}' not found.")
 
     @classmethod
@@ -62,9 +66,9 @@ class ReadExcel:
         return cls.get_user(username)["password"]
 
     @classmethod
-    def get_product(cls, row_index=0):
-        """Return one product by row index (0 = first product in Excel)."""
-        workbook, sheet = cls._get_sheet(cls.PRODUCTS_SHEET)
+    def get_all_products(cls):
+        """Return all products from the Products sheet."""
+        sheet = cls._get_sheet(cls.PRODUCTS_SHEET)
         products = []
         for row in sheet.iter_rows(min_row=2, values_only=True):
             name, price, add_to_cart_id = row[0], row[1], row[2]
@@ -74,9 +78,19 @@ class ReadExcel:
                     "price": float(price),
                     "add_to_cart_id": str(add_to_cart_id),
                 })
-        workbook.close()
         if not products:
             raise ValueError("No products found in Excel.")
+        return products
+
+    @classmethod
+    def get_product(cls, row_index=0):
+        """Return one product by row index (0 = first product in Excel)."""
+        products = cls.get_all_products()
         if row_index < 0 or row_index >= len(products):
             raise IndexError(f"Product row {row_index} out of range.")
         return products[row_index]
+
+    @classmethod
+    def get_product_count(cls):
+        """Return how many products are defined in Excel."""
+        return len(cls.get_all_products())

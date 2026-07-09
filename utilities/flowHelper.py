@@ -1,6 +1,5 @@
 """Full flow helper — login, add to cart, logout in one function."""
 
-from pages.add_to_cart import AddToCartPage
 from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 from pages.logout_page import LogoutPage
@@ -24,7 +23,7 @@ def run_login_add_to_cart_logout(driver, product_row_index=0):
 
     # Step 2 — add one product and read the cart badge
     product = ReadExcel.get_product(product_row_index)
-    AddToCartPage(driver).click_add_to_cart(product["add_to_cart_id"])
+    InventoryPage(driver).click_add_to_cart(product["add_to_cart_id"])
     cart_count = InventoryPage(driver).get_cart_badge_count()
 
     # Step 3 — log out via hamburger menu
