@@ -9,7 +9,7 @@ from utilities.testConstants import INITIAL_CART_COUNT
 
 def test_login_add_to_cart_logout(driver, test_logger):
     """End-to-end flow should add a product and return to the login page."""
-    test_logger.info("Starting: full flow login → add to cart → logout")
+    test_logger.info("Starting: full flow login -> add to cart -> logout")
 
     product, cart_count = run_login_add_to_cart_logout(driver, product_row_index=0)
 

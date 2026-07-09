@@ -1,12 +1,9 @@
 @echo off
-REM Run all tests on Chrome
-
 cd /d "%~dp0"
 call .venv\Scripts\activate.bat
+python -m pytest -s -v --html=./Reports/report.html --self-contained-html tests/ --browser chrome
 
-echo Running all tests on Chrome...
-pytest -s -v --html=./Reports/report.html --self-contained-html tests/ --browser chrome
-
-echo.
-echo HTML report: Reports\report.html
+REM Skip pause on Jenkins (pause blocks the build)
+if defined JENKINS_URL goto :eof
+if defined BUILD_NUMBER goto :eof
 pause

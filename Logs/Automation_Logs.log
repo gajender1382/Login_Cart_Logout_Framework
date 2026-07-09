@@ -106,3 +106,22 @@
 07/09/2026 08:24:19 PM : INFO : Starting: logout flow
 07/09/2026 08:24:20 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_logout_success_20260709_202420.png
 07/09/2026 08:24:20 PM : INFO : Ending: logout test
+07/09/2026 08:35:39 PM : INFO : Starting: add to cart for Sauce Labs Backpack
+07/09/2026 08:35:39 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_backpack_success_20260709_203539.png
+07/09/2026 08:35:39 PM : INFO : Ending: add to cart test
+07/09/2026 08:35:56 PM : INFO : Starting: add to cart for Sauce Labs Bike Light
+07/09/2026 08:35:57 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_add_to_cart_add_to_cart_sauce_labs_bike_light_success_20260709_203556.png
+07/09/2026 08:35:57 PM : INFO : Ending: add to cart test
+07/09/2026 08:36:04 PM : INFO : Added Sauce Labs Backpack, cart count=1
+07/09/2026 08:36:04 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_full_flow_complete_success_20260709_203604.png
+07/09/2026 08:36:04 PM : INFO : Ending: full flow test
+07/09/2026 08:36:10 PM : INFO : Starting: login and verify inventory page
+07/09/2026 08:36:11 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_login_inventory_success_20260709_203611.png
+07/09/2026 08:36:11 PM : INFO : Ending: login test
+07/09/2026 08:36:15 PM : INFO : Starting: wrong password login test
+07/09/2026 08:36:16 PM : INFO : Ending: wrong password login test
+07/09/2026 08:36:20 PM : INFO : Starting: locked out user login test
+07/09/2026 08:36:21 PM : INFO : Ending: locked out user login test
+07/09/2026 08:36:26 PM : INFO : Starting: logout flow
+07/09/2026 08:36:27 PM : INFO : Screenshot: C:\Users\Gajender\OneDrive\Desktop\Study\Login_Cart_Logout_Framework\Screenshots\test_logout_success_20260709_203627.png
+07/09/2026 08:36:27 PM : INFO : Ending: logout test
